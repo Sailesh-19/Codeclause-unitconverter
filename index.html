@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Unit Converter</title>
+</head>
+<body>
+  <h1>Unit Converter</h1>
+
+  <h2>Select Conversion:</h2>
+  <select id="conversionSelect" onchange="updateConversionForm()">
+    <option value="">Select a conversion</option>
+    <option value="length">Length (Inches to Centimeters)</option>
+    <option value="speed">Speed (Kilometers per Hour to Miles per Hour)</option>
+    <option value="temperature">Temperature (Celsius to Fahrenheit)</option>
+    <option value="area">Area (Square Meters to Square Feet)</option>
+    <option value="mass">Mass (Kilograms to Pounds)</option>
+    <option value="volume">Volume (Liters to Gallons)</option>
+    <option value="time">Time (Minutes to Hours)</option>
+  </select>
+
+  <div id="conversionForm">
+    <!-- Conversion form will be dynamically updated here -->
+  </div>
+
+  <script>
+    function updateConversionForm() {
+      var select = document.getElementById("conversionSelect");
+      var selectedValue = select.value;
+
+      var conversionForm = document.getElementById("conversionForm");
+      conversionForm.innerHTML = ""; // Clear previous form
+
+      if (selectedValue === "length") {
+        createLengthForm();
+      } else if (selectedValue === "speed") {
+        createSpeedForm();
+      } else if (selectedValue === "temperature") {
+        createTemperatureForm();
+      } else if (selectedValue === "area") {
+        createAreaForm();
+      } else if (selectedValue === "mass") {
+        createMassForm();
+      } else if (selectedValue === "volume") {
+        createVolumeForm();
+      } else if (selectedValue === "time") {
+        createTimeForm();
+      }
+    }
+
+    function createLengthForm() {
+      var form = document.getElementById("conversionForm");
+
+      var inchInput = document.createElement("input");
+      inchInput.type = "number";
+      inchInput.placeholder = "Enter inches";
+
+      var convertBtn = document.createElement("button");
+      convertBtn.textContent = "Convert";
+      convertBtn.onclick = convertLength;
+
+      var resultParagraph = document.createElement("p");
+      resultParagraph.id = "lengthResult";
+
+      form.appendChild(document.createTextNode("Inches: "));
+      form.appendChild(inchInput);
+      form.appendChild(convertBtn);
+      form.appendChild(resultParagraph);
+    }
+
+    function convertLength() {
+      var inchInput = document.querySelector("#conversionForm input");
+      var inches = parseFloat(inchInput.value);
+
+      if (isNaN(inches)) {
+        document.getElementById("lengthResult").textContent = "Invalid input";
+        return;
+      }
+
+      var centimeters = inches * 2.54;
+      document.getElementById("lengthResult").textContent = inches + " inches = " + centimeters + " centimeters";
+    }
+
+    function createSpeedForm() {
+      var form = document.getElementById("conversionForm");
+
+      var kmhInput = document.createElement("input");
+      kmhInput.type = "number";
+      kmhInput.placeholder = "Enter km/h";
+
+      var convertBtn = document.createElement("button");
+      convertBtn.textContent = "Convert";
+      convertBtn.onclick = convertSpeed;
+
+      var resultParagraph = document.createElement("p");
+      resultParagraph.id = "speedResult";
+
+      form.appendChild(document.createTextNode("Kilometers per Hour: "));
+      form.appendChild(kmhInput);
+      form.appendChild(convertBtn);
+      form.appendChild(resultParagraph);
+    }
+
+    function convertSpeed() {
+      var kmhInput = document.querySelector("#conversionForm input");
+      var kmh = parseFloat(kmhInput.value);
+
+      if (isNaN(kmh)) {
+        document.getElementById("speedResult").textContent = "Invalid input";
+        return;
+      }
+
+      var mph = kmh * 0.621371;
+      document.getElementById("speedResult").textContent = kmh + " km/h = " + mph + " mph";
+    }
+
+    function createTemperatureForm() {
+      var form = document.getElementById("conversionForm");
+
+      var celsiusInput = document.createElement("input");
+      celsiusInput.type = "number";
+      celsiusInput.placeholder = "Enter °C";
+
+      var convertBtn = document.createElement("button");
+      convertBtn.textContent = "Convert";
+      convertBtn.onclick = convertTemperature;
+
+      var resultParagraph = document.createElement("p");
+      resultParagraph.id = "temperatureResult";
+
+      form.appendChild(document.createTextNode("Celsius: "));
+      form.appendChild(celsiusInput);
+      form.appendChild(convertBtn);
+      form.appendChild(resultParagraph);
+    }
+
+    function convertTemperature() {
+      var celsiusInput = document.querySelector("#conversionForm input");
+      var celsius = parseFloat(celsiusInput.value);
+
+      if (isNaN(celsius)) {
+        document.getElementById("temperatureResult").textContent = "Invalid input";
+        return;
+      }
+
+      var fahrenheit = (celsius * 9/5) + 32;
+      document.getElementById("temperatureResult").textContent = celsius + " °C = " + fahrenheit + " °F";
+    }
+
+    function createAreaForm() {
+      var form = document.getElementById("conversionForm");
+
+      var sqmInput = document.createElement("input");
+      sqmInput.type = "number";
+      sqmInput.placeholder = "Enter square meters";
+
+      var convertBtn = document.createElement("button");
+      convertBtn.textContent = "Convert";
+      convertBtn.onclick = convertArea;
+
+      var resultParagraph = document.createElement("p");
+      resultParagraph.id = "areaResult";
+
+      form.appendChild(document.createTextNode("Square Meters: "));
+      form.appendChild(sqmInput);
+      form.appendChild(convertBtn);
+      form.appendChild(resultParagraph);
+    }
+
+    function convertArea() {
+      var sqmInput = document.querySelector("#conversionForm input");
+      var sqm = parseFloat(sqmInput.value);
+
+      if (isNaN(sqm)) {
+        document.getElementById("areaResult").textContent = "Invalid input";
+        return;
+      }
+
+      var sqft = sqm * 10.7639;
+      document.getElementById("areaResult").textContent = sqm + " square meters = " + sqft + " square feet";
+    }
+
+    function createMassForm() {
+      var form = document.getElementById("conversionForm");
+
+      var kgInput = document.createElement("input");
+      kgInput.type = "number";
+      kgInput.placeholder = "Enter kilograms";
+
+      var convertBtn = document.createElement("button");
+      convertBtn.textContent = "Convert";
+      convertBtn.onclick = convertMass;
+
+      var resultParagraph = document.createElement("p");
+      resultParagraph.id = "massResult";
+
+      form.appendChild(document.createTextNode("Kilograms: "));
+      form.appendChild(kgInput);
+      form.appendChild(convertBtn);
+      form.appendChild(resultParagraph);
+    }
+
+    function convertMass() {
+      var kgInput = document.querySelector("#conversionForm input");
+      var kg = parseFloat(kgInput.value);
+
+      if (isNaN(kg)) {
+        document.getElementById("massResult").textContent = "Invalid input";
+        return;
+      }
+
+      var lbs = kg * 2.20462;
+      document.getElementById("massResult").textContent = kg + " kilograms = " + lbs + " pounds";
+    }
+
+    function createVolumeForm() {
+      var form = document.getElementById("conversionForm");
+
+      var literInput = document.createElement("input");
+      literInput.type = "number";
+      literInput.placeholder = "Enter liters";
+
+      var convertBtn = document.createElement("button");
+      convertBtn.textContent = "Convert";
+      convertBtn.onclick = convertVolume;
+
+      var resultParagraph = document.createElement("p");
+      resultParagraph.id = "volumeResult";
+
+      form.appendChild(document.createTextNode("Liters: "));
+      form.appendChild(literInput);
+      form.appendChild(convertBtn);
+      form.appendChild(resultParagraph);
+    }
+
+    function convertVolume() {
+      var literInput = document.querySelector("#conversionForm input");
+      var liters = parseFloat(literInput.value);
+
+      if (isNaN(liters)) {
+        document.getElementById("volumeResult").textContent = "Invalid input";
+        return;
+      }
+
+      var gallons = liters * 0.264172;
+      document.getElementById("volumeResult").textContent = liters + " liters = " + gallons + " gallons";
+    }
+
+    function createTimeForm() {
+      var form = document.getElementById("conversionForm");
+
+      var minutesInput = document.createElement("input");
+      minutesInput.type = "number";
+      minutesInput.placeholder = "Enter minutes";
+
+      var convertBtn = document.createElement("button");
+      convertBtn.textContent = "Convert";
+      convertBtn.onclick = convertTime;
+
+      var resultParagraph = document.createElement("p");
+      resultParagraph.id = "timeResult";
+
+      form.appendChild(document.createTextNode("Minutes: "));
+      form.appendChild(minutesInput);
+      form.appendChild(convertBtn);
+      form.appendChild(resultParagraph);
+    }
+
+    function convertTime() {
+      var minutesInput = document.querySelector("#conversionForm input");
+      var minutes = parseFloat(minutesInput.value);
+
+      if (isNaN(minutes)) {
+        document.getElementById("timeResult").textContent = "Invalid input";
+        return;
+      }
+
+      var hours = minutes / 60;
+      document.getElementById("timeResult").textContent = minutes + " minutes = " + hours + " hours";
+    }
+  </script>
+</body>
+</html>
